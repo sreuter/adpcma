@@ -39,7 +39,7 @@ static int		adpcm_decstep	= 0;	/* ADPCM decoding step; initial condition must be
 static short	diff;
 static short	step;
 static int		predictsample;
-static int		index;					/* Index into step_size table */
+static int		newindex;					/* Index into step_size table */
 static int		prevsample		= 0;	/* previous sample; initial condition must be 0 */
 static int		previndex		= 0;	/* previous index; initial condition must be 0 */
 

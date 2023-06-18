@@ -59,8 +59,8 @@ static unsigned char ADPCMA_Encode(short sample){
 	unsigned char code;
 
 	predictsample = prevsample;
-	index = previndex;
-	step = step_size[index];
+	newindex = previndex;
+	step = step_size[newindex];
 
 	diff = sample - predictsample;
 
@@ -89,13 +89,13 @@ static unsigned char ADPCMA_Encode(short sample){
 
 	predictsample = ADPCMA_Decode(code);
 
-	index += step_adj[code];
+	newindex += step_adj[code];
 
-	if(index < 0){ index = 0; }
-	if(index > 48){ index = 48; }
+	if(newindex < 0){ newindex = 0; }
+	if(newindex > 48){ newindex = 48; }
 
 	prevsample = predictsample;
-	previndex = index;
+	previndex = newindex;
 
 	return code;
 }
@@ -251,7 +251,7 @@ int main(int argc, char *argv[]){
 	diff = 0;
 	step = 0;
 	predictsample = 0;
-	index = 0;
+	newindex = 0;
 
 	/* prepare output file */
 	outFile = fopen(outFilename,"wb");
